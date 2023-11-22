@@ -1,14 +1,15 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import icon from '../../assets/icon.svg';
 import './App.css';
+import Navbar from './components/Navbar';
 
-function Hello() {
+function Hello({ title }) {
   return (
     <div>
       <div className="Hello">
         <img width="200" alt="icon" src={icon} />
       </div>
-      <h1>electron-react-boilerplate</h1>
+      <h1>{title}</h1>
       <div className="Hello">
         <a
           href="https://electron-react-boilerplate.js.org/"
@@ -42,8 +43,10 @@ function Hello() {
 export default function App() {
   return (
     <Router>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<Hello />} />
+        <Route path="/" element={<Hello title="ホーム" />} />
+        <Route path="/a" element={<Hello title="ページA" />} />
       </Routes>
     </Router>
   );

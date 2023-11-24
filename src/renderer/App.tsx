@@ -2,6 +2,7 @@ import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import icon from '../../assets/icon.svg';
 import './App.css';
 import Navbar from './components/Navbar';
+import SmartManager from './components/SmartManager';
 
 function Hello({ title }) {
   return (
@@ -46,7 +47,7 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Hello title="ホーム" />} />
-        <Route path="/a" element={<Hello title="ページA" />} />
+        <Route path="/a" element={<SmartManager />} />
       </Routes>
     </Router>
   );

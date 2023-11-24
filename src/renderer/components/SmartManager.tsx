@@ -44,6 +44,7 @@ export default function SmartManager() {
       <div>
         <img width="100%" height="100%" alt="screenshot" src={screenshot} />
       </div>
+      <h3>ダウンロードしたCSVを読み込む</h3>
       <div {...getRootProps({ className: 'dropzone' })}>
         <input {...getInputProps()} />
         {isDragActive ? (

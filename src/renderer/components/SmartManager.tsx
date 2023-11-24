@@ -1,5 +1,5 @@
 import { useDropzone } from 'react-dropzone';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
@@ -7,13 +7,48 @@ import screenshot from '../../../assets/images/smsm.png';
 
 const options = ['教室長', '直営', '社員'];
 
+const baseStyle = {
+  flex: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  padding: '20px',
+  borderWidth: 2,
+  borderRadius: 2,
+  borderColor: '#eeeeee',
+  borderStyle: 'dashed',
+  backgroundColor: '#fafafa',
+  color: '#bdbdbd',
+  outline: 'none',
+  transition: 'border .24s ease-in-out',
+};
+
+const focusedStyle = {
+  borderColor: '#2196f3',
+};
+
+const acceptStyle = {
+  borderColor: '#00e676',
+};
+
+const rejectStyle = {
+  borderColor: '#ff1744',
+};
+
 export default function SmartManager() {
-  const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
-    useDropzone({
-      accept: {
-        'text/csv': ['.csv'],
-      },
-    });
+  const {
+    acceptedFiles,
+    getRootProps,
+    getInputProps,
+    isDragActive,
+    isFocused,
+    isDragAccept,
+    isDragReject,
+  } = useDropzone({
+    accept: {
+      'text/csv': ['.csv'],
+    },
+  });
 
   const files = acceptedFiles.map((file) => (
     <li key={file.path}>
@@ -38,6 +73,16 @@ export default function SmartManager() {
     console.log('click');
   };
 
+  const style = useMemo(
+    () => ({
+      ...baseStyle,
+      ...(isFocused ? focusedStyle : {}),
+      ...(isDragAccept ? acceptStyle : {}),
+      ...(isDragReject ? rejectStyle : {}),
+    }),
+    [isFocused, isDragAccept, isDragReject],
+  );
+
   return (
     <section>
       <h1>KDDI Smart Mobile Safety Manager</h1>
@@ -49,7 +94,8 @@ export default function SmartManager() {
         <img width="100%" height="100%" alt="screenshot" src={screenshot} />
       </div>
       <h3>ダウンロードしたCSVを読み込む</h3>
-      <div {...getRootProps({ className: 'dropzone' })}>
+      {isDragAccept}
+      <div {...getRootProps({ style, className: 'dropzone' })}>
         <input {...getInputProps()} />
         {isDragActive ? (
           <p>Drop the files here ...</p>

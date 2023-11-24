@@ -1,5 +1,6 @@
 import { useDropzone } from 'react-dropzone';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
@@ -52,6 +53,13 @@ export default function SmartManager() {
       />
       <h3>回線番号</h3>
       <textarea rows={10} placeholder="090-1234-5678" onChange={onChange} />
+      <h3>結果</h3>
+      <Link
+        download="result.csv"
+        to="data:text/csv;base64,YSxiLGMNCmEsYixjDQphLGIsYw=="
+      >
+        ダウンロード
+      </Link>
       <aside>
         <h4>Files</h4>
         <ul>{files}</ul>

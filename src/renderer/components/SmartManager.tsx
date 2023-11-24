@@ -34,6 +34,10 @@ export default function SmartManager() {
     console.log(e.target.value);
   };
 
+  const onClick = () => {
+    console.log('click');
+  };
+
   return (
     <section>
       <h1>KDDI Smart Mobile Safety Manager</h1>
@@ -62,6 +66,10 @@ export default function SmartManager() {
       />
       <h3>回線番号</h3>
       <textarea rows={10} placeholder="090-1234-5678" onChange={onChange} />
+      <h3>CSV変換</h3>
+      <button type="submit" onClick={onClick}>
+        実行
+      </button>
       <h3>結果</h3>
       <Link
         download="result.csv"

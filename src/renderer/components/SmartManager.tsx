@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import screenshot from '../../../assets/images/smsm.png';
 
 const options = ['教室長', '直営', '社員'];
 
@@ -36,6 +37,13 @@ export default function SmartManager() {
   return (
     <section>
       <h1>KDDI Smart Mobile Safety Manager</h1>
+      <h3>CSVファイルをダウンロードする</h3>
+      <p>
+        下記のとおり必要な項目にチェックを入れ、CSVファイルをダウンロードする。
+      </p>
+      <div>
+        <img width="100%" height="100%" alt="screenshot" src={screenshot} />
+      </div>
       <div {...getRootProps({ className: 'dropzone' })}>
         <input {...getInputProps()} />
         {isDragActive ? (

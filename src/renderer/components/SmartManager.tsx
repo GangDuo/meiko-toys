@@ -28,6 +28,10 @@ export default function SmartManager() {
 
   const defaultOption = option.selected;
 
+  const onChange = (e) => {
+    console.log(e.target.value);
+  };
+
   return (
     <section>
       <h1>KDDI Smart Mobile Safety Manager</h1>
@@ -46,6 +50,8 @@ export default function SmartManager() {
         value={defaultOption}
         placeholder="Select an option"
       />
+      <h3>回線番号</h3>
+      <textarea rows={10} placeholder="090-1234-5678" onChange={onChange} />
       <aside>
         <h4>Files</h4>
         <ul>{files}</ul>

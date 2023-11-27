@@ -1,9 +1,17 @@
 import { useDropzone } from 'react-dropzone';
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
-import Dropdown from 'react-dropdown';
+import * as ReactDropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import screenshot from '../../../assets/images/smsm.png';
+
+type DropdownState = {
+  selected: string | ReactDropdown.Option;
+};
+const defaultDropdownState: DropdownState = { selected: '' };
+
+const Dropdown = ReactDropdown.default;
+
 
 const options = ['教室長', '直営', '社員'];
 
@@ -56,16 +64,16 @@ export default function SmartManager() {
     </li>
   ));
 
-  const [option, setOption] = useState({ selected: '' });
+  const [option, setOption] = useState(defaultDropdownState);
 
-  const onSelect = (op: Option) => {
-    console.log('You selected ', op.label);
+  const onSelect = (op: ReactDropdown.Option) => {
+    console.log('You selected ', op?.label);
     setOption({ selected: op });
   };
 
   const defaultOption = option.selected;
 
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     console.log(e.target.value);
   };
 
@@ -74,12 +82,13 @@ export default function SmartManager() {
   };
 
   const style = useMemo(
-    () => ({
-      ...baseStyle,
-      ...(isFocused ? focusedStyle : {}),
-      ...(isDragAccept ? acceptStyle : {}),
-      ...(isDragReject ? rejectStyle : {}),
-    }),
+    () =>
+      ({
+        ...baseStyle,
+        ...(isFocused ? focusedStyle : {}),
+        ...(isDragAccept ? acceptStyle : {}),
+        ...(isDragReject ? rejectStyle : {}),
+      }) as React.CSSProperties,
     [isFocused, isDragAccept, isDragReject],
   );
 

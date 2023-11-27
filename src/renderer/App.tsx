@@ -4,7 +4,11 @@ import './App.css';
 import Navbar from './components/Navbar';
 import SmartManager from './components/SmartManager';
 
-function Hello({ title }) {
+interface HelloProps {
+  title: string;
+}
+
+function Hello({ title }: HelloProps) {
   return (
     <div>
       <div className="Hello">
